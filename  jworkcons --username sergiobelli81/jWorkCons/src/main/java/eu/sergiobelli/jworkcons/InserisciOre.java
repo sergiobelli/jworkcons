@@ -5,8 +5,8 @@ import org.apache.wicket.markup.html.WebPage;
 /**
  * @author sbelli
  */
-public class Page2 extends WebPage {
-	public Page2() {
+public class InserisciOre extends WebPage {
+	public InserisciOre() {
         add(new JWorkConsBorder("JWorkConsBorder"));
     }
 }
