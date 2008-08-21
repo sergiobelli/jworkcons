@@ -1,7 +1,7 @@
 package eu.sergiobelli.jworkcons.orm.model;
 
 /**
- * 
+ * bla bla bla
  * @author sergio
  * @Entity
  * @Table(name="tipologie_lavoro")
