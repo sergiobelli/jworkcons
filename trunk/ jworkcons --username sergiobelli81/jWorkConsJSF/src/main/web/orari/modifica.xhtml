@@ -11,32 +11,32 @@
 			<h:form>
 				<h:panelGrid columns="2">       
 					<h:outputLabel value="#{labels.data}"/>
-					<h:inputText value="#{ModificaOrariExecuter.data}" converter="eu.sergiobelli.jworkcons.fe.converters.DateTimeConverter" />						 
+					<h:inputText value="#{ModificaOrariExecuter.data}" converter="eu.sergiobelli.jworkcons.fe.converters.DateTimeConverter"  required="true"/>						 
 					 
 					<h:outputLabel value="#{labels.ora}"/>
 					<h:panelGroup>
-						<h:selectOneMenu value="#{ModificaOrariExecuter.ora}">
+						<h:selectOneMenu value="#{ModificaOrariExecuter.ora}" required="true">
 							<f:selectItems value="#{ModificaOrariExecuter.ore}" />
 							<f:convertNumber />
 						</h:selectOneMenu>
-						<h:selectOneMenu value="#{ModificaOrariExecuter.minuto}">
+						<h:selectOneMenu value="#{ModificaOrariExecuter.minuto}" required="true">
 							<f:selectItems value="#{ModificaOrariExecuter.minuti}" />
 							<f:convertNumber />
 						</h:selectOneMenu>
 					</h:panelGroup>
 					
 					<h:outputLabel value="#{labels.evento}"/>
-					<h:selectOneMenu value="#{ModificaOrariExecuter.tipologiaEvento}">
+					<h:selectOneMenu value="#{ModificaOrariExecuter.tipologiaEvento}" required="true">
 						<f:selectItems value="#{ModificaOrariExecuter.tipologieEvento}" />
 					</h:selectOneMenu> 
 					
 					<h:outputLabel value="#{labels.tipologia}"/>
-					<h:selectOneMenu value="#{ModificaOrariExecuter.tipologiaLavoro}">
+					<h:selectOneMenu value="#{ModificaOrariExecuter.tipologiaLavoro}" required="true">
 						<f:selectItems value="#{ModificaOrariExecuter.tipologieLavoro}" />
 					</h:selectOneMenu> 
 					
 					<h:outputLabel value="#{labels.note}"/>
-					<h:inputTextarea value="#{ModificaOrariExecuter.note}" rows="10" cols="100"/>
+					<h:inputTextarea value="#{ModificaOrariExecuter.note}" rows="10" cols="100" required="false" />
 					
 					<h:commandButton value="#{buttons.modifica}" action="#{ModificaOrariExecuter.modifica}"/>
 					<h:commandButton value="#{buttons.annulla}" action="elenco"/>

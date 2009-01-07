@@ -8,6 +8,9 @@
 
 	<application>
 		<view-handler>com.sun.facelets.FaceletViewHandler</view-handler>
+		<!-- Caricamento del contesto di spring --><!--
+		<variable-resolver>org.springframework.web.jsf.DelegatingVariableResolver</variable-resolver>-->
+		<!-- Caricamento del contesto di spring -->
 		<locale-config>
 			<default-locale>it</default-locale>
 			<supported-locale>en</supported-locale>
@@ -65,9 +68,24 @@
    <managed-bean> 
       <managed-bean-name>LoginExecuter</managed-bean-name>
       <managed-bean-class>eu.sergiobelli.jworkcons.fe.executers.authentication.LoginExecuter</managed-bean-class> 
-      <managed-bean-scope>session</managed-bean-scope> 
+      <managed-bean-scope>session</managed-bean-scope>
    </managed-bean>
 
+	<managed-bean>
+		<managed-bean-name>DefaultExecuter</managed-bean-name>
+		<managed-bean-class>eu.sergiobelli.jworkcons.fe.executers.DefaultExecuter</managed-bean-class> 
+		<managed-bean-scope>request</managed-bean-scope>
+		<!-- Caricamento del contesto di spring --><!--
+		<managed-property>
+			<property-name>tipologieLavoroBridge</property-name>
+			<value>#{tipologieLavoroBridge}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>tipologieEventoBridge</property-name>
+			<value>#{tipologieEventoBridge}</value>
+		</managed-property>-->
+		<!-- Caricamento del contesto di spring -->
+	</managed-bean>
 	<managed-bean> 
 		<managed-bean-name>ElencoOrariExecuter</managed-bean-name>
 		<managed-bean-class>eu.sergiobelli.jworkcons.fe.executers.orari.ElencoOrariExecuter</managed-bean-class> 
