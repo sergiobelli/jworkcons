@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<faces-config
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd"
+    version="1.2">
+
+	<application>
+		<view-handler>com.sun.facelets.FaceletViewHandler</view-handler>
+		<locale-config>
+			<default-locale>it</default-locale>
+			<supported-locale>en</supported-locale>
+		</locale-config>
+	</application>
+
+	<converter>
+		<converter-id>eu.sergiobelli.jworkcons.fe.converters.TipologieLavoroConverter</converter-id>
+		<converter-class>eu.sergiobelli.jworkcons.fe.converters.TipologieLavoroConverter</converter-class>
+	</converter>
+	
+	<converter>
+		<converter-id>eu.sergiobelli.jworkcons.fe.converters.DateTimeConverter</converter-id>
+		<converter-class>eu.sergiobelli.jworkcons.fe.converters.DateTimeConverter</converter-class>
+	</converter>
+	
+	<navigation-rule>
+		<from-view-id>/login/login.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>loginDone</from-outcome>
+			<to-view-id>/home/home.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>loginFailed</from-outcome>
+			<to-view-id>/login/login.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+   
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>inserisci</from-outcome>
+			<to-view-id>/orari/inserisci.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>modifica</from-outcome>
+			<to-view-id>/orari/modifica.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>elimina</from-outcome>
+			<to-view-id>/orari/elimina.xhtml</to-view-id>
+		</navigation-case>		
+		<navigation-case>
+			<from-outcome>elenco</from-outcome>
+			<to-view-id>/orari/elenco.xhtml</to-view-id>
+		</navigation-case>	
+	</navigation-rule>
+
+	<managed-bean> 
+      <managed-bean-name>JWorkConsMenu</managed-bean-name>
+      <managed-bean-class>eu.sergiobelli.jworkcons.fe.executers.menu.JWorkConsMenu</managed-bean-class> 
+      <managed-bean-scope>application</managed-bean-scope> 
+   </managed-bean>
+	
+   <managed-bean> 
+      <managed-bean-name>LoginExecuter</managed-bean-name>
+      <managed-bean-class>eu.sergiobelli.jworkcons.fe.executers.authentication.LoginExecuter</managed-bean-class> 
+      <managed-bean-scope>session</managed-bean-scope> 
+   </managed-bean>
+
+	<managed-bean> 
+		<managed-bean-name>ElencoOrariExecuter</managed-bean-name>
+		<managed-bean-class>eu.sergiobelli.jworkcons.fe.executers.orari.ElencoOrariExecuter</managed-bean-class> 
+		<managed-bean-scope>request</managed-bean-scope> 
+	</managed-bean>	
+	<managed-bean> 
+		<managed-bean-name>InserisciOrariExecuter</managed-bean-name>
+		<managed-bean-class>eu.sergiobelli.jworkcons.fe.executers.orari.InserisciOrariExecuter</managed-bean-class> 
+		<managed-bean-scope>session</managed-bean-scope> 
+	</managed-bean>
+	<managed-bean> 
+		<managed-bean-name>ModificaOrariExecuter</managed-bean-name>
+		<managed-bean-class>eu.sergiobelli.jworkcons.fe.executers.orari.ModificaOrariExecuter</managed-bean-class> 
+		<managed-bean-scope>session</managed-bean-scope> 
+	</managed-bean>
+	<managed-bean> 
+		<managed-bean-name>EliminaOrariExecuter</managed-bean-name>
+		<managed-bean-class>eu.sergiobelli.jworkcons.fe.executers.orari.EliminaOrariExecuter</managed-bean-class> 
+		<managed-bean-scope>session</managed-bean-scope> 
+	</managed-bean>
+		
+</faces-config>

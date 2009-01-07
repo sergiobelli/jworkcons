@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Orari">
+    <resultMap id="OrariResult" class="eu.sergiobelli.jworkcons.be.orm.model.Orari">
+        <result property="id"        column="ID" />
+		<result property="data"      column="DATA" />
+		<result property="ora"       column="ORA" />
+		<result property="minuto"    column="MINUTO" />
+		<result property="evento"    column="EVENTO"    select="TipologieEvento.getById" />
+		<result property="tipologia" column="TIPOLOGIA" select="TipologieLavoro.getById" />
+		<result property="note"      column="NOTE" />
+    </resultMap>
+    
+	<cacheModel id="cacheOrari" type="MEMORY">
+		<flushOnExecute statement="Orari.insert"/>
+		<flushOnExecute statement="Orari.update"/>
+		<flushOnExecute statement="Orari.delete"/>
+		<flushInterval minutes="5" />
+	</cacheModel>
+	
+    <select id="get" 
+			parameterClass="eu.sergiobelli.jworkcons.be.orm.ParametersMap" 
+			resultMap="OrariResult"
+			cacheModel="cacheOrari">
+    	select * 
+    	from   orari
+    	<dynamic prepend="WHERE">
+			<iterate  property="argList" conjunction="AND">
+				$argList[].name$ $argList[].operand$ #argList[].value#
+			</iterate>	  	 	
+		</dynamic>
+		order by orari.data
+	</select>	
+	
+	<insert id="insert" parameterClass="eu.sergiobelli.jworkcons.be.orm.model.Orari">
+		
+		insert into orari
+			( data,ora,minuto,evento,tipologia,note )
+		values 
+			( #data#,#ora#,#minuto#,#evento.id#,#tipologia.id#,#note# )
+		
+	</insert>
+	
+	<update id="update" parameterClass="eu.sergiobelli.jworkcons.be.orm.model.Orari">
+		
+		update orari
+		set
+			data = #data#,
+			ora  = #ora#,
+			minuto  = #minuto#,
+			evento  = #evento.id#,
+			tipologia  = #tipologia.id#,
+			note  = #note#
+		where id = #id#
+		
+	</update>
+	
+	<delete id="delete" parameterClass="java.lang.Integer">
+		
+		delete from orari where id = #id#
+		
+	</delete>
+	
+</sqlMap>

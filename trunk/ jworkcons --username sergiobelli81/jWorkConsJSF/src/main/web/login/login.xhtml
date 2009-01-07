@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+	<f:view>
+		
+		<f:loadBundle basename="eu.sergiobelli.jworkcons.fe.bundles.titles"   var="titles" />
+		<f:loadBundle basename="eu.sergiobelli.jworkcons.fe.bundles.labels"   var="labels" />
+		<f:loadBundle basename="eu.sergiobelli.jworkcons.fe.bundles.buttons"  var="buttons" />
+		<f:loadBundle basename="eu.sergiobelli.jworkcons.fe.bundles.messages" var="messages" />
+		<f:loadBundle basename="eu.sergiobelli.jworkcons.fe.bundles.errors"   var="errors" />
+			
+		<head>
+			<title>
+				<h:outputLabel value="#{titles.applicationName}" />
+			</title>
+			<link rel="stylesheet" type="text/css" href="../style/style.css" />
+		</head>
+		
+		<body>      
+			<h:form>                  	
+				<h:panelGrid columns="2">                
+					<h:outputLabel value="#{labels.username}"/>
+					<h:inputText value="#{LoginExecuter.username}" />         		
+					<h:outputLabel value="#{labels.password}"/>
+					<h:inputSecret value="#{LoginExecuter.password}" />         		
+					<h:commandButton value="#{buttons.login}" action="#{LoginExecuter.login}" />
+					<h:messages />         		
+				</h:panelGrid>
+			</h:form>
+		</body>
+		
+   </f:view>
+
+</html>

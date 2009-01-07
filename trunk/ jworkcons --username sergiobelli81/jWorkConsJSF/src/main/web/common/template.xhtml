@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core">
+
+    <head> 
+		
+		<f:loadBundle basename="eu.sergiobelli.jworkcons.fe.bundles.titles" var="titles" />
+		<f:loadBundle basename="eu.sergiobelli.jworkcons.fe.bundles.labels" var="labels" />
+		<f:loadBundle basename="eu.sergiobelli.jworkcons.fe.bundles.buttons" var="buttons" />
+		<f:loadBundle basename="eu.sergiobelli.jworkcons.fe.bundles.messages" var="messages" />
+		<f:loadBundle basename="eu.sergiobelli.jworkcons.fe.bundles.errors" var="errors" />
+			
+		<title>
+			<h:outputLabel value="#{titles.applicationName}" />
+		</title>
+		<link rel="stylesheet" type="text/css" href="../style/style.css" />
+    </head>
+	
+	<body>
+		<ui:insert name="javascript" />
+		
+		<div id="header">
+			<div id="header_inner">
+				<h1><h:outputLabel value="#{titles.applicationName}" /></h1>
+				<div id="slogan"><h:outputText value="#{titles.applicationSlogan}" /></div>
+			</div>
+		</div>
+		
+		<div id="main">
+			<div id="lcol">
+				<div id="lcontent">
+					<ui:insert name="menu">
+						<h:form id="menuForm">
+							<h:outputText>
+								<h3><h:outputLabel value="#{titles.menu}" /></h3>
+								<ul>
+									<li><h:commandLink value="#{labels.inserisci}" 	action="#{JWorkConsMenu.inserisci}" /></li>
+									<li><h:commandLink value="#{labels.elenco}"   	action="#{JWorkConsMenu.elenco}" /></li>
+								</ul>    
+							</h:outputText>
+						</h:form>
+					</ui:insert>
+				</div>
+			</div>
+		</div>
+			
+		<div id="rcol">
+			<div id="rcontent">				
+				<div class="box_inner"><h:messages /></div>				
+				<ui:insert name="body" />
+			</div>
+		</div>
+		
+	</body>
+	
+</html>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	
+	<!-- dao -->
+	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean" >
+		<property name="jndiName" value="java:comp/env/jdbc/jworkcons" /> 
+	</bean>
+	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+        <property name="dataSource">
+            <ref bean="dataSource" />
+        </property>
+        <property name="useTransactionAwareDataSource">
+            <value>true</value>
+        </property>
+        <property name="configLocation">
+            <value>eu/sergiobelli/jworkcons/be/orm/sql-map-config.xml</value>
+        </property>
+    </bean>
+	<bean id="dataBaseDao" class="eu.sergiobelli.jworkcons.be.orm.DataBaseDao">
+        <property name="sqlMapClient">
+            <ref bean="sqlMapClient" />
+        </property>
+    </bean>
+	<bean id="DbManager" class="eu.sergiobelli.jworkcons.be.orm.DbManager" singleton="true">
+        <property name="dataBaseDao">
+            <ref bean="dataBaseDao" />
+        </property>
+    </bean>
+	<bean id="TipologieLavoroDAO" class="eu.sergiobelli.jworkcons.be.orm.TipologieLavoroDAO" singleton="false">
+        <property name="dataBaseDao">
+            <ref bean="dataBaseDao" />
+        </property>
+    </bean>
+	<bean id="TipologieEventoDAO" class="eu.sergiobelli.jworkcons.be.orm.TipologieEventoDAO" singleton="false">
+        <property name="dataBaseDao">
+            <ref bean="dataBaseDao" />
+        </property>
+    </bean>
+	<bean id="OrariDAO" class="eu.sergiobelli.jworkcons.be.orm.OrariDAO" singleton="false">
+        <property name="dataBaseDao">
+            <ref bean="dataBaseDao" />
+        </property>
+    </bean>
+	
+	<!-- autenticazione -->
+    <bean id="authenticationService" class="eu.sergiobelli.jworkcons.be.services.authentication.AuthenticationService" />
+    <bean id="authenticationBridge" class="eu.sergiobelli.jworkcons.fe.bridges.authentication.AuthenticationBridge">
+       <property name="authenticationService"><ref bean="authenticationService" /></property>
+    </bean>
+	
+	<!-- orari -->
+	<bean id="orariService" class="eu.sergiobelli.jworkcons.be.services.orari.OrariService">
+		<property name="orariDao"><ref bean="OrariDAO" /></property>
+	</bean>
+    <bean id="orariBridge" class="eu.sergiobelli.jworkcons.fe.bridges.orari.OrariBridge">
+       <property name="orariService"><ref bean="orariService" /></property>
+    </bean>
+	
+	<!-- tipologie lavoro -->
+	<bean id="tipologieLavoroService" class="eu.sergiobelli.jworkcons.be.services.tipologielavoro.TipologieLavoroService">
+		<property name="tipologieLavoroDAO"><ref bean="TipologieLavoroDAO" /></property>
+	</bean>
+    <bean id="tipologieLavoroBridge" class="eu.sergiobelli.jworkcons.fe.bridges.tipologielavoro.TipologieLavoroBridge">
+       <property name="tipologieLavoroService"><ref bean="tipologieLavoroService" /></property>
+    </bean>
+	
+	<!-- tipologie evento -->
+	<bean id="tipologieEventoService" class="eu.sergiobelli.jworkcons.be.services.tipologieevento.TipologieEventoService">
+		<property name="tipologieEventoDAO"><ref bean="TipologieEventoDAO" /></property>
+	</bean>
+    <bean id="tipologieEventoBridge" class="eu.sergiobelli.jworkcons.fe.bridges.tipologieevento.TipologieEventoBridge">
+       <property name="tipologieEventoService"><ref bean="tipologieEventoService" /></property>
+    </bean>
+		
+</beans>

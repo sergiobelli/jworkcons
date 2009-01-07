@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<ui:composition template="../common/template.xhtml">
+	
+		<ui:define name="title"/>
+		
+		<ui:define name="body">
+			
+    		<h:form>
+    		
+				<h:dataTable 
+	            		id="elencoOrari" 
+	            		value="#{ElencoOrariExecuter.orari}" 
+	            		var="orario" 
+	            		headerClass="FacetFieldCaptionTD"
+	            		rowClasses="FacetDataTD"
+	            		columnClasses="FacetDataTD"
+	            		styleClass="FacetFormTABLE">
+	            
+	            	<h:column>
+	                	<f:facet name="header"><h:outputText value="#{labels.data}"/></f:facet>
+	                    <h:outputText value="#{orario.data}" converter="eu.sergiobelli.jworkcons.fe.converters.DateTimeConverter" />
+	                </h:column>
+	            
+	            	<h:column>
+	                	<f:facet name="header"><h:outputText value="#{labels.ora}"/></f:facet>
+	                    <h:outputText value="#{orario.ora}"/> : <h:outputText value="#{orario.minuto}"/>
+	                </h:column>
+	               
+	                <h:column>
+	                	<f:facet name="header"><h:outputText value="#{labels.evento}"/></f:facet>
+	                    <h:outputText value="#{orario.evento.descrizione}"/>
+	                </h:column>
+	                
+	            	<h:column>
+	                	<f:facet name="header"><h:outputText value="#{labels.tipologia}"/></f:facet>
+	                    <h:outputText value="#{orario.tipologia.descrizione}"/>
+	                </h:column>                
+				
+	            	<h:column>
+	                	<f:facet name="header"><h:outputText value="#{labels.operazioni}"/></f:facet>
+	                    <h:commandLink actionListener="#{ModificaOrariExecuter.load}" action="modifica">
+	                    	<h:outputText value="#{buttons.modifica}"/>
+	                        <f:attribute name="idOrario" value="#{orario.id}" />
+	                    </h:commandLink>
+                        <h:outputText value=" "/>
+	                    <h:commandLink actionListener="#{EliminaOrariExecuter.load}" action="elimina">
+	                    	<h:outputText value="#{buttons.elimina}"/>
+	                        <f:attribute name="idOrario" value="#{orario.id}" />
+	                    </h:commandLink>                        
+                    </h:column> 
+	                
+	            </h:dataTable>
+				
+			</h:form>		
+		</ui:define>
+	
+	</ui:composition>
+
+</html>
