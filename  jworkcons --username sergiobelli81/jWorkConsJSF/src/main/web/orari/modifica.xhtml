@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<ui:composition template="../common/template.xhtml">
+		<ui:define name="title"></ui:define>
+		<ui:define name="body">
+			<h:form>
+				<h:panelGrid columns="2">       
+					<h:outputLabel value="#{labels.data}"/>
+					<h:inputText value="#{ModificaOrariExecuter.data}" converter="eu.sergiobelli.jworkcons.fe.converters.DateTimeConverter" />						 
+					 
+					<h:outputLabel value="#{labels.ora}"/>
+					<h:panelGroup>
+						<h:selectOneMenu value="#{ModificaOrariExecuter.ora}">
+							<f:selectItems value="#{ModificaOrariExecuter.ore}" />
+							<f:convertNumber />
+						</h:selectOneMenu>
+						<h:selectOneMenu value="#{ModificaOrariExecuter.minuto}">
+							<f:selectItems value="#{ModificaOrariExecuter.minuti}" />
+							<f:convertNumber />
+						</h:selectOneMenu>
+					</h:panelGroup>
+					
+					<h:outputLabel value="#{labels.evento}"/>
+					<h:selectOneMenu value="#{ModificaOrariExecuter.tipologiaEvento}">
+						<f:selectItems value="#{ModificaOrariExecuter.tipologieEvento}" />
+					</h:selectOneMenu> 
+					
+					<h:outputLabel value="#{labels.tipologia}"/>
+					<h:selectOneMenu value="#{ModificaOrariExecuter.tipologiaLavoro}">
+						<f:selectItems value="#{ModificaOrariExecuter.tipologieLavoro}" />
+					</h:selectOneMenu> 
+					
+					<h:outputLabel value="#{labels.note}"/>
+					<h:inputTextarea value="#{ModificaOrariExecuter.note}" rows="10" cols="100"/>
+					
+					<h:commandButton value="#{buttons.modifica}" action="#{ModificaOrariExecuter.modifica}"/>
+					<h:commandButton value="#{buttons.annulla}" action="elenco"/>
+					
+					<h:messages />
+				</h:panelGrid>
+    		</h:form>		
+		</ui:define>
+	</ui:composition>
+</html>

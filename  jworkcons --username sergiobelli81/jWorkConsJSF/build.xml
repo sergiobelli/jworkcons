@@ -1,0 +1,80 @@
+<project name="jWorkCons" basedir="." default="release">
+  <property file="build.properties"/>
+  <target name="init" depends="clean">
+      <mkdir dir="${build.dir}"/>
+      <mkdir dir="${classes.dir}"/>
+  	  <mkdir dir="${dist.dir}"/>
+  </target>
+
+  <path id="classpath.id">
+    <fileset dir="${lib.dir}" includes="**/*.jar" />
+ </path>
+
+  <!--clean -->
+  <target name="clean" description="Clean the project">
+    <echo message="cleaning project..."/>
+    <delete quiet="true" dir="${build.dir}"/>
+    <delete quiet="true" dir="${classes.dir}"/>
+  	<delete quiet="true" dir="${dist.dir}"/>  	
+  	<delete quiet="true" dir="${deploy.dir}/${application.name}"/>
+  	<delete quiet="true" dir="${deploy.dir}/jworkcons"/>
+	<delete quiet="true" dir="${release.dir}/${application.name}"/>
+  	<delete quiet="true" dir="${release.dir}/jworkcons"/>
+  </target>
+
+  <target name="build" description="compile console java sources" depends="init">
+    <javac classpathref="classpath.id"
+           srcdir="${src.dir}"
+           destdir="${classes.dir}"
+           debug="yes"/>
+  </target>
+
+  <target name="dist" description="creates the  console a web application" depends="clean,init,build">
+    <tstamp><format property="init.timestamp" pattern="dd.MM.yyyy"/></tstamp>
+  	<copy todir="${classes.dir}" >
+		
+		  <!-- resources -->
+		  <fileset dir="${resources.dir}" includes="**/*.*" />
+		  
+		  <!-- bundles -->
+			<fileset dir="${src.java.dir}"><include name="**/*.properties"/></fileset>
+		  
+	</copy>
+    <war destfile="${dist.dir}/${application.name}" webxml="src/main/web/WEB-INF/web.xml"> 
+    	
+		
+		
+		<!-- jsp -->
+		<fileset dir="src/main/web"></fileset>
+		
+		<!--  configurations -->
+		<classes dir="${conf.dir}" />
+		
+		<!--  web application classes -->
+		<classes dir="${classes.dir}" />
+		
+        <lib dir="${lib.dir}/">
+          <exclude name="*/*.*"/>
+        </lib>
+		
+		<manifest/>
+    </war>
+  </target>
+
+  <target name="deploy" depends="dist">
+    <copy todir="${deploy.dir}">
+      <fileset dir="${dist.dir}/">
+        <include name="${application.name}" />
+      </fileset>
+    </copy>
+  </target>
+	
+	<target name="release" depends="deploy">
+    <copy todir="${release.dir}">
+      <fileset dir="${deploy.dir}/">
+        <include name="${application.name}" />
+      </fileset>
+    </copy>
+  </target>
+	
+</project>
