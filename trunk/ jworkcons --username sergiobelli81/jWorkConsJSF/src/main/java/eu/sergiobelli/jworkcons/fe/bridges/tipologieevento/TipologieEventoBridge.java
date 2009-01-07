@@ -6,10 +6,8 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import eu.sergiobelli.jworkcons.be.orm.model.TipologieEvento;
-import eu.sergiobelli.jworkcons.be.orm.model.TipologieLavoro;
 import eu.sergiobelli.jworkcons.be.services.tipologieevento.TipologieEventoService;
 import eu.sergiobelli.jworkcons.fe.view.TipologieEventoView;
-import eu.sergiobelli.jworkcons.fe.view.TipologieLavoroView;
 
 public class TipologieEventoBridge {
 	private final Logger logger = Logger.getLogger(this.getClass());
