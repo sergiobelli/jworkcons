@@ -11,11 +11,11 @@
 			<h:form>
 				<h:panelGrid columns="2">       
 					<h:outputLabel value="#{labels.data}"/>
-					<h:inputText value="#{InserisciOrariExecuter.data}" converter="eu.sergiobelli.jworkcons.fe.converters.DateTimeConverter" />						 
+					<h:inputText value="#{InserisciOrariExecuter.data}" converter="eu.sergiobelli.jworkcons.fe.converters.DateTimeConverter"  required="true" />						 
 					 
 					<h:outputLabel value="#{labels.ora}"/>
 					<h:panelGroup>
-						<h:selectOneMenu value="#{InserisciOrariExecuter.ora}">
+						<h:selectOneMenu value="#{InserisciOrariExecuter.ora}" required="true">
 							<f:selectItems value="#{InserisciOrariExecuter.ore}" />
 							<f:convertNumber />
 						</h:selectOneMenu>
@@ -26,17 +26,17 @@
 					</h:panelGroup>
 					
 					<h:outputLabel value="#{labels.evento}"/>
-					<h:selectOneMenu value="#{InserisciOrariExecuter.tipologiaEvento}">
+					<h:selectOneMenu value="#{InserisciOrariExecuter.tipologiaEvento}" required="true">
 						<f:selectItems value="#{InserisciOrariExecuter.tipologieEvento}" />
 					</h:selectOneMenu> 
 					
 					<h:outputLabel value="#{labels.tipologia}"/>
-					<h:selectOneMenu value="#{InserisciOrariExecuter.tipologiaLavoro}">
+					<h:selectOneMenu value="#{InserisciOrariExecuter.tipologiaLavoro}" required="true">
 						<f:selectItems value="#{InserisciOrariExecuter.tipologieLavoro}" />
 					</h:selectOneMenu> 
 					
 					<h:outputLabel value="#{labels.note}"/>
-					<h:inputTextarea value="#{InserisciOrariExecuter.note}" rows="10" cols="100"/>
+					<h:inputTextarea value="#{InserisciOrariExecuter.note}" rows="10" cols="100" required="false"/>
 					
 					<h:commandButton value="#{buttons.inserisci}" action="#{InserisciOrariExecuter.insert}"/>
 					<h:commandButton value="#{buttons.annulla}" action="elenco"/>

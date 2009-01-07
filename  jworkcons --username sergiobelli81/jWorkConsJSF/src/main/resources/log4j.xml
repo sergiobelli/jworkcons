@@ -27,19 +27,19 @@
 	
 	<!-- be -->
 	<category name="eu.sergiobelli.jworkcons.be">
-        <priority value="DEBUG" />
+        <priority value="INFO" />
         <appender-ref ref="be" />
     </category>
 	
 	<!-- fe -->
 	<category name="eu.sergiobelli.jworkcons.fe">
-        <priority value="DEBUG" />
+        <priority value="INFO" />
         <appender-ref ref="fe" />
     </category>
 	
 	<!-- CONSOLE -->
     <category name="CONSOLE">
-        <priority value="DEBUG" />
+        <priority value="INFO" />
         <appender-ref ref="console" />
     </category>
 	

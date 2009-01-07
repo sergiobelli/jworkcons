@@ -8,6 +8,8 @@ import javax.faces.model.SelectItem;
 import org.apache.log4j.Logger;
 
 import eu.sergiobelli.jworkcons.fe.bridges.ApplicationContextFactory;
+import eu.sergiobelli.jworkcons.fe.bridges.tipologieevento.TipologieEventoBridge;
+import eu.sergiobelli.jworkcons.fe.bridges.tipologielavoro.TipologieLavoroBridge;
 import eu.sergiobelli.jworkcons.fe.view.TipologieEventoView;
 import eu.sergiobelli.jworkcons.fe.view.TipologieLavoroView;
 
@@ -43,19 +45,21 @@ public class DefaultExecuter {
 	public List<SelectItem> getMinuti() {return minuti;}
 	public void setMinuti(List<SelectItem> minuti) {this.minuti = minuti;}
 	
-	private String timeZone;
-	public String getTimeZone() {return timeZone;}
-	public void setTimeZone(String timeZone) {this.timeZone = timeZone;}
+	private TipologieLavoroBridge tipologieLavoroBridge;
+//	public TipologieLavoroBridge getTipologieLavoroBridge() {return tipologieLavoroBridge;}
+	public TipologieLavoroBridge getTipologieLavoroBridge() {return ApplicationContextFactory.getInstance().getTipologieLavoroBridge();}
+	public void setTipologieLavoroBridge(TipologieLavoroBridge tipologieLavoroBridge) {this.tipologieLavoroBridge = tipologieLavoroBridge;}
 	
-	private String locale;
-	public String getLocale() {return locale;}
-	public void setLocale(String locale) {this.locale = locale;}
+	private TipologieEventoBridge tipologieEventoBridge;
+//	public TipologieEventoBridge getTipologieEventoBridge() {return tipologieEventoBridge;}
+	public TipologieEventoBridge getTipologieEventoBridge() {return ApplicationContextFactory.getInstance().getTipologieEventoBridge();}
+	public void setTipologieEventoBridge(TipologieEventoBridge tipologieEventoBridge) {this.tipologieEventoBridge = tipologieEventoBridge;}
 	
 	public DefaultExecuter() {
 
 		try {
 			//tipologie lavoro
-			List<TipologieLavoroView> tipologieLavoroLista = ApplicationContextFactory.getInstance().getTipologieLavoroBridge().list();
+			List<TipologieLavoroView> tipologieLavoroLista = getTipologieLavoroBridge().list();
 			List<SelectItem> tipologieLavoroList = new ArrayList<SelectItem>();
 			for (TipologieLavoroView elemento : tipologieLavoroLista) {
 				tipologieLavoroList.add(new SelectItem(elemento.getId(),elemento.getDescrizione()));
@@ -63,7 +67,7 @@ public class DefaultExecuter {
 			setTipologieLavoro(tipologieLavoroList);
 
 			//Tipologie evento
-			List<TipologieEventoView> tipologieEventoLista = ApplicationContextFactory.getInstance().getTipologieEventoBridge().list();
+			List<TipologieEventoView> tipologieEventoLista = getTipologieEventoBridge().list();
 			List<SelectItem> tipologieEventoList = new ArrayList<SelectItem>();
 			for (TipologieEventoView elemento : tipologieEventoLista) {
 				tipologieEventoList.add(new SelectItem(elemento.getId(),elemento.getDescrizione()));

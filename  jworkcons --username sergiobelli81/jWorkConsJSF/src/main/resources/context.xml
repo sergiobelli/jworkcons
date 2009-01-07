@@ -73,4 +73,11 @@
        <property name="tipologieEventoService"><ref bean="tipologieEventoService" /></property>
     </bean>
 		
+	<!-- Caricamento del contesto di spring --><!--	
+	<bean id="defaultExecuter" class="eu.sergiobelli.jworkcons.fe.executers.DefaultExecuter">		
+		<property name="tipologieLavoroBridge"><ref bean="tipologieLavoroBridge" /></property>
+		<property name="tipologieEventoBridge"><ref bean="tipologieEventoBridge" /></property>
+	</bean>-->
+	<!-- Caricamento del contesto di spring -->
+	
 </beans>
